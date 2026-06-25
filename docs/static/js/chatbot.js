@@ -9,8 +9,12 @@ const chatbotMessages = document.getElementById('chatbot-messages');
 // Toggle chatbot
 chatbotToggle.addEventListener('click', () => {
     chatbot.classList.toggle('active');
+    const bubble = document.querySelector('.zudo-bubble');
     if (chatbot.classList.contains('active')) {
         chatbotInput.focus();
+        if (bubble) bubble.style.display = 'none';
+    } else {
+        if (bubble) bubble.style.display = '';
     }
 });
 
@@ -31,16 +35,28 @@ function sendMessage() {
     addMessage(text, 'user');
     chatbotInput.value = '';
 
+    // Show typing animation
+    const typing = document.createElement('div');
+    typing.className = 'chatbot-typing';
+    typing.innerHTML = '<span></span><span></span><span></span>';
+    chatbotMessages.appendChild(typing);
+    chatbotMessages.scrollTop = chatbotMessages.scrollHeight;
+
     setTimeout(() => {
+        typing.remove();
         const reply = getReply(text);
         addMessage(reply, 'bot');
-    }, 500);
+    }, 800);
 }
 
 function addMessage(text, type) {
     const msg = document.createElement('div');
     msg.className = `chat-msg ${type}`;
-    msg.textContent = text;
+    if (type === 'bot') {
+        msg.innerHTML = text.replace(/\n/g, '<br>');
+    } else {
+        msg.textContent = text;
+    }
     chatbotMessages.appendChild(msg);
     chatbotMessages.scrollTop = chatbotMessages.scrollHeight;
 }
