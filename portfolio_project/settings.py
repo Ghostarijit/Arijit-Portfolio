@@ -34,7 +34,7 @@ RAILWAY_PUBLIC_DOMAIN = os.environ.get("RAILWAY_PUBLIC_DOMAIN")
 if RAILWAY_PUBLIC_DOMAIN:
     ALLOWED_HOSTS.append(RAILWAY_PUBLIC_DOMAIN)
 # PythonAnywhere
-ALLOWED_HOSTS.append("ghostarijit.pythonanywhere.com")
+ALLOWED_HOSTS.append("arijitbiswas484.pythonanywhere.com")
 CSRF_TRUSTED_ORIGINS = [f"https://{host}" for host in ALLOWED_HOSTS if host]
 
 
