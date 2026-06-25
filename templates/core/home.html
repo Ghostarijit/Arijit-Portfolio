@@ -1,0 +1,355 @@
+{% extends "base.html" %}
+{% load static %}
+{% load core_filters %}
+
+{% block content %}
+<!-- Hero Section -->
+<section class="hero" id="hero">
+    <div class="hero-overlay"></div>
+    <div class="hero-particles" id="particles"></div>
+    <div class="hero-content">
+        <div class="hero-text">
+            <p class="hero-greeting">👋 Hey there, I'm</p>
+            <h1 class="hero-name">{{ profile.name|default:"Arijit Biswas" }}</h1>
+            <h2 class="hero-title">
+                <span class="title-highlight">Team Lead</span> &amp; Senior Software Engineer
+            </h2>
+            <p class="hero-summary">Building mission-critical systems for Dubai Government. 4+ years crafting scalable backends, leading teams, and shipping production-grade Python services that handle 15k+ transactions/day.</p>
+            <div class="hero-stats">
+                <div class="stat-item">
+                    <span class="stat-number">4+</span>
+                    <span class="stat-label">Years Experience</span>
+                </div>
+                <div class="stat-item">
+                    <span class="stat-number">15k+</span>
+                    <span class="stat-label">Txns/Day</span>
+                </div>
+                <div class="stat-item">
+                    <span class="stat-number">99.9%</span>
+                    <span class="stat-label">Uptime</span>
+                </div>
+                <div class="stat-item">
+                    <span class="stat-number">50k+</span>
+                    <span class="stat-label">IoT Events/Day</span>
+                </div>
+            </div>
+            <div class="hero-cta">
+                <a href="#contact" class="btn btn-primary"><i class="fas fa-paper-plane"></i> Hire Me</a>
+                <a href="#projects" class="btn btn-outline"><i class="fas fa-code"></i> View Projects</a>
+            </div>
+            <div class="hero-socials">
+                {% if profile.github %}
+                <a href="{{ profile.github }}" target="_blank"><i class="fab fa-github"></i></a>
+                {% endif %}
+                {% if profile.linkedin %}
+                <a href="{{ profile.linkedin }}" target="_blank"><i class="fab fa-linkedin"></i></a>
+                {% endif %}
+                <a href="mailto:{{ profile.email|default:'arijitbiswas484@gmail.com' }}"><i class="fas fa-envelope"></i></a>
+            </div>
+        </div>
+        <div class="hero-tech-icons">
+            <!-- Python -->
+            <div class="floating-icon" style="--delay: 0s; --x: 68%; --y: 12%">
+                <svg viewBox="0 0 128 128"><path fill="#3776AB" d="M63.4 1.1C31.3 1.1 33.2 15.1 33.2 15.1l.1 14.5h30.8v4.4H24.5S1 30.7 1 63.6s20.5 31.7 20.5 31.7h12.2V80.5s-.7-20.5 20.2-20.5h30.2s19.5.3 19.5-18.9V18.6S107 1.1 63.4 1.1zM47.1 11.3c3.5 0 6.4 2.9 6.4 6.4s-2.9 6.4-6.4 6.4-6.4-2.9-6.4-6.4 2.9-6.4 6.4-6.4z"/><path fill="#FFD43B" d="M64.6 126.9c32.1 0 30.2-14 30.2-14l-.1-14.5H64v-4.4h39.6s23.5 3.3 23.5-29.6-20.5-31.7-20.5-31.7H94.3v14.8s.7 20.5-20.2 20.5H43.9s-19.5-.3-19.5 18.9v22.5S21 126.9 64.6 126.9zm16.3-10.2c-3.5 0-6.4-2.9-6.4-6.4s2.9-6.4 6.4-6.4 6.4 2.9 6.4 6.4-2.9 6.4-6.4 6.4z"/></svg>
+            </div>
+            <!-- Django -->
+            <div class="floating-icon" style="--delay: 0.8s; --x: 82%; --y: 20%">
+                <svg viewBox="0 0 128 128"><path fill="#0C4B33" d="M59.4 0h20.2v96.6c-10.4 2-18 2.8-26.3 2.8C31.5 99.4 20 88.8 20 66.4c0-21.2 12.3-34.8 31.5-34.8 3 0 5.2.3 7.9 1V0zM59.4 49c-2-0.7-3.7-1-5.9-1-9.4 0-14.8 7.2-14.8 19.8 0 12.2 5.2 18.9 14.6 18.9 2 0 3.7-.2 6.1-.7V49z"/><path fill="#0C4B33" d="M108 23.3v53.4c0 18.4-1.4 27.2-5.4 34.8-3.7 7.2-8.6 11.7-18.7 16.7L65 119.4c10.1-4.7 14.8-8.7 18-15.2 3.4-6.7 4.5-14.5 4.5-34.2V23.3H108z"/><path fill="#0C4B33" d="M87.5 0h20.5v16.5H87.5z"/></svg>
+            </div>
+            <!-- Docker -->
+            <div class="floating-icon" style="--delay: 1.5s; --x: 75%; --y: 45%">
+                <svg viewBox="0 0 128 128"><path fill="#2496ED" d="M124.8 52.1c-4.3-2.5-10-2.8-14.8-1.4-.6-5.2-4-9.7-8-12.9l-1.6-1.3-1.4 1.6c-2.7 3.3-3.4 8.8-3.1 13 .3 3.1 1.2 6.3 3 9-3.2 1.8-6.8 2.6-10.2 3H2.3c-1.5 8.3-.3 19.2 4.8 27.3 5.8 9 14.8 13.4 27.4 13.4 24.2 0 42.2-11.2 50.6-31.5 3.3.1 10.4.2 14-6.9l.3-.5-1.6-.9zM24 56.9h-8.7v8.7H24v-8.7zm11.3 0H26.5v8.7h8.7v-8.7zm11.2 0H37.8v8.7h8.7v-8.7zm11.3 0H49.1v8.7h8.7v-8.7zM35.3 45.6H26.5v8.7h8.7v-8.7zm11.2 0H37.8v8.7h8.7v-8.7zm11.3 0H49.1v8.7h8.7v-8.7zm11.2 0h-8.7v8.7H69v-8.7zm0-11.3h-8.7v8.7H69v-8.7z"/></svg>
+            </div>
+            <!-- PostgreSQL -->
+            <div class="floating-icon" style="--delay: 2s; --x: 88%; --y: 60%">
+                <svg viewBox="0 0 128 128"><path fill="#336791" d="M93.8 18.6c-5-2.5-10.3-3.8-15.8-4.2-3.6-.2-7.1.1-10.5 1-1.3-.5-2.7-.8-4.1-1.1-5.5-1-10.8-.7-15.8.7-1.6-0.5-3.2-.9-4.9-1.2-5.8-1-11.2-.5-16 1.5C18.1 19 13.1 25.6 10 34c-4 10.8-3.5 22.8 1.4 35.8 1.6 4.2 3.5 8.1 5.6 11.6 3.1 5.2 6.5 9.4 10 12.3 3.1 2.6 6.1 3.9 8.8 3.9 1.3 0 2.6-.3 3.7-.9 2.5-1.4 4.2-4.2 5.1-8.5l.7.5c2 1.3 4.1 2 6.2 2.1h.5c3.4 0 6.5-1.8 8.7-5.1.1-.2.3-.4.4-.6 1.3 1.3 2.8 2.2 4.5 2.8 1.3.4 2.7.7 4.2.7 5.5 0 11.5-3.3 16.1-9.1 3.8-4.8 6.3-10.7 7-16.5.1-.6.1-1.2.2-1.8 2.4-2.4 4.3-5.2 5.6-8.5 2.7-6.8 2.8-13.7.3-19.3-1.6-3.6-4.2-6.4-7.6-8.3z"/><path fill="#fff" d="M90.6 23.5c4.8 2.6 7 7.3 7 14.2 0 4.7-1.3 9.5-3.5 14.2-1.5 3.2-3.5 5.7-5.9 7.8-.1 1-.3 2-.5 3-.7 5.4-3 10.8-6.5 15.2-4 5-9.1 7.8-13.5 7.8-1.2 0-2.3-.2-3.3-.5-2.3-.8-4.1-2.5-5.4-5-.2.3-.4.6-.6.8-2.7 4-6 5.7-9.3 4.7-2.5-.7-4.7-2.8-6.5-5.9l-.1-.2c-.8 4-2.2 6.6-4.3 7.8-2.4 1.3-5.2.5-8.2-2-3.3-2.8-6.5-6.8-9.5-11.8-2.1-3.5-3.9-7.1-5.4-11.2-4.6-12.2-5-23.4-1.4-33.3 2.9-7.7 7.4-13.5 15.1-16.9 4.4-2 9.3-2.5 14.6-1.5 1.2.2 2.3.5 3.5.9 4.5-1.4 9.3-1.7 14.4-.8 1.5.3 3 .7 4.4 1.2 3.2-.9 6.5-1.3 9.8-1 5 .4 9.9 1.6 14.6 3.9z"/><path fill="#336791" d="M56.8 79.6c-1.5-2.8-2.2-6.3-2.2-10.5V56.9c0-1.6-.4-2.8-1.1-3.5-.7-.7-1.7-1.1-3-1.2h-.3c-1.5 0-2.8.5-3.8 1.6-1.2 1.2-1.8 2.8-1.8 4.8v2.2c0 5.5-.7 10-2 13.3-1.3 3.3-3.2 6.2-5.6 8.5l.3.5c1.5 2.7 3.2 4.3 5.1 4.8 2.1.6 4.3-.5 6.3-3.3 1.6-2.3 2.7-4.9 3.3-7.9-.4-.7-.7-1.5-.9-2.3-.1-.4-.2-.8-.3-1.2zm30-30.9c0-5.4-.8-9.5-2.5-12.5-1.7-3-4-4.5-7-4.5h-.4c-3.4.2-5.8 1.9-7.3 5.3-1.3 2.8-1.9 6.7-1.9 11.6v3c0 4.5.6 8.2 1.9 11.2 1.5 3.4 3.8 5 7 5h.4c3 0 5.3-1.5 7-4.6 1.8-3.2 2.7-7.4 2.7-12.6v-2z"/></svg>
+            </div>
+            <!-- Redis -->
+            <div class="floating-icon" style="--delay: 0.3s; --x: 62%; --y: 80%">
+                <svg viewBox="0 0 128 128"><path fill="#DC382D" d="M121.8 93.1c-6.7 3.5-41.4 17.7-48.8 21.5-7.4 3.9-11.5 3.8-17.3 1-5.9-2.8-42.9-17.8-49.6-21-3.3-1.6-5.1-3-5.1-4.3v-13s48.1-10.5 55.8-13.2c7.7-2.8 10.4-2.9 17-.5s44.1 9.2 49.9 11.2v12.8c0 1.3-1.5 2.8-4.9 4.5z"/><path fill="#A41E11" d="M121.8 80.1c-6.7 3.5-41.4 17.7-48.8 21.5-7.4 3.9-11.5 3.8-17.3 1C49.8 99.8 12.8 84.7 6.1 82c-6.6-2.7-6.9-4.6-.2-7.2 6.7-2.6 44.2-17.4 51.9-20.1s10.4-2.9 17-.5c6.6 2.4 40.6 16.3 47.3 19.1 6.8 2.7 6.4 4.1-.3 6.8z"/><path fill="#DC382D" d="M121.8 73.5c-6.7 3.5-41.4 17.7-48.8 21.5-7.4 3.9-11.5 3.8-17.3 1-5.9-2.8-42.9-17.8-49.6-21-3.3-1.6-5.1-3-5.1-4.3V57.5s48.1-10.5 55.8-13.2c7.7-2.8 10.4-2.9 17-.5s44.1 9.2 49.9 11.2V68c0 1.2-1.5 2.7-4.9 4.5z"/><path fill="#A41E11" d="M121.8 60.5c-6.7 3.5-41.4 17.7-48.8 21.5-7.4 3.9-11.5 3.8-17.3 1C49.8 80.2 12.8 65.1 6.1 62.4c-6.6-2.7-6.9-4.6-.2-7.2C12.6 52.6 50.1 37.8 57.8 35s10.4-2.9 17-.5c6.6 2.4 40.6 16.3 47.3 19.1 6.8 2.7 6.4 4.1-.3 6.9z"/><path fill="#DC382D" d="M121.8 54c-6.7 3.5-41.4 17.7-48.8 21.5-7.4 3.9-11.5 3.8-17.3 1-5.9-2.8-42.9-17.8-49.6-21C2.8 53.9 1 52.5 1 51.2V38s48.1-10.5 55.8-13.2c7.7-2.8 10.4-2.9 17-.5s44.1 9.2 49.9 11.2v12.8c0 1.3-1.5 2.8-4.9 4.7z"/><path fill="#A41E11" d="M121.8 41c-6.7 3.5-41.4 17.7-48.8 21.5-7.4 3.9-11.5 3.8-17.3 1C49.8 60.7 12.8 45.6 6.1 42.9c-6.6-2.7-6.9-4.6-.2-7.2C12.6 33.1 50.1 18.3 57.8 15.5s10.4-2.9 17-.5c6.6 2.4 40.6 16.3 47.3 19.1 6.8 2.8 6.4 4.2-.3 6.9z"/></svg>
+            </div>
+            <!-- AWS -->
+            <div class="floating-icon" style="--delay: 1.2s; --x: 92%; --y: 30%">
+                <svg viewBox="0 0 128 128"><path fill="#F7A80D" d="M38.1 62.6c0 2.4.3 4.3.8 5.7s1.3 3 2.3 4.7c.4.6.5 1.2.5 1.7 0 .7-.4 1.5-1.3 2.2l-4.4 2.9c-.6.4-1.2.6-1.8.6-.7 0-1.4-.4-2.1-1.1-1-1-1.8-2.1-2.5-3.2-.7-1.2-1.4-2.5-2.1-4.1-5.4 6.3-12.1 9.5-20.2 9.5-5.8 0-10.4-1.6-13.8-4.9-3.4-3.3-5.2-7.7-5.2-13.1 0-5.8 2-10.5 6.2-14.1 4.1-3.6 9.6-5.3 16.6-5.3 2.3 0 4.7.2 7.2.5s5.1.9 7.9 1.5v-5c0-5.5-1.2-9.4-3.4-11.6-2.3-2.2-6.2-3.3-11.7-3.3-2.5 0-5.1.3-7.7.9-2.6.6-5.2 1.4-7.7 2.5-.6.3-1.1.4-1.5.5-.4.1-.7.2-1 .2-.9 0-1.3-.6-1.3-1.9v-3.4c0-1 .1-1.7.4-2.2.3-.5.8-.9 1.7-1.4 2.5-1.3 5.5-2.4 9-3.2 3.5-.9 7.2-1.3 11.1-1.3 8.5 0 14.7 1.9 18.6 5.8 3.9 3.9 5.8 9.7 5.8 17.6v23.1h.1zM22.5 72.8c2.2 0 4.5-.4 7-1.2 2.5-.8 4.7-2.3 6.5-4.3.7-.8 1.2-1.7 1.5-2.8.3-1.1.5-2.4.5-3.9v-5.7c-2-.5-4.2-.9-6.4-1.2s-4.4-.4-6.5-.4c-4.5 0-7.8 1.1-10 3.2-2.2 2.2-3.3 5.2-3.3 9.1 0 3.6.9 6.3 2.7 8.1 1.8 1.9 4.3 2.8 7.5 2.8l.5.1z"/><path fill="#F7A80D" d="M72.4 80.6c-1.1 0-1.9-.2-2.4-.7-.5-.4-.9-1.4-1.3-2.7L55.3 29.5c-.4-1.4-.6-2.3-.6-2.7 0-1.1.5-1.7 1.6-1.7h6.9c1.2 0 2 .2 2.5.7.5.4.9 1.4 1.2 2.7l9.3 36.7 8.6-36.7c.3-1.4.7-2.3 1.2-2.7.5-.4 1.4-.7 2.5-.7h5.6c1.2 0 2 .2 2.5.7.5.4 1 1.4 1.2 2.7l8.7 37.1L116 28.5c.4-1.4.8-2.3 1.3-2.7.5-.4 1.3-.7 2.4-.7h6.6c1.1 0 1.6.5 1.6 1.7 0 .3-.1.7-.1 1.1-.1.4-.2.9-.5 1.6l-14 47.7c-.4 1.4-.8 2.3-1.3 2.7-.5.4-1.3.7-2.4.7h-6.1c-1.2 0-2-.2-2.5-.7-.5-.5-1-1.4-1.2-2.7l-8.6-35.7-8.5 35.6c-.3 1.4-.7 2.3-1.2 2.7-.5.5-1.4.7-2.5.7h-6.1l-.1.4z"/><path fill="#F7A80D" d="M120.4 85.3c-8.3 6.1-20.3 9.4-30.6 9.4-14.5 0-27.5-5.4-37.3-14.3-.8-.7-.1-1.7.8-1.1 10.6 6.2 23.8 9.9 37.4 9.9 9.2 0 19.2-1.9 28.5-5.8 1.4-.6 2.6.9 1.2 1.9z"/><path fill="#F7A80D" d="M124 81c-1.1-1.4-7.2-.7-10-3-.7-.1-1-.5-.2-1 4.9-3.2 12.9-2.3 13.8-1.2.9 1.1-.2 8.9-4.8 12.6-.7.6-1.4.3-1.1-.5.1-.3 1.4-4.5.3-5.9z"/></svg>
+            </div>
+            <!-- Nginx -->
+            <div class="floating-icon" style="--delay: 2.3s; --x: 58%; --y: 35%">
+                <svg viewBox="0 0 128 128"><path fill="#009639" d="M64 0L12.5 30v68L64 128l51.5-30V30zm22.9 92.1c0 3.9-3.5 7-7.8 7-2.8 0-5.4-1.3-6.8-3.5L49.1 59.1v33c0 3.9-3.2 7-7.2 7s-7.2-3.1-7.2-7V35.9c0-3.9 3.5-7 7.8-7 2.8 0 5.4 1.3 6.8 3.5l23.2 36.5V35.9c0-3.9 3.2-7 7.2-7s7.2 3.1 7.2 7z"/></svg>
+            </div>
+            <!-- Git -->
+            <div class="floating-icon" style="--delay: 1.8s; --x: 70%; --y: 88%">
+                <svg viewBox="0 0 128 128"><path fill="#F05032" d="M124.7 57.1L70.9 3.4c-4.4-4.4-11.6-4.4-16 0L45 13.2l12.7 12.7c3-1 6.4-.3 8.8 2 2.4 2.4 3.1 5.9 2 8.9l12.2 12.2c3-.9 6.4-.3 8.8 2.1 3.4 3.4 3.4 8.8 0 12.2-3.4 3.4-8.8 3.4-12.2 0-2.6-2.6-3.2-6.3-1.9-9.5L63.6 41.8v33.2c.8.4 1.6.9 2.3 1.6 3.4 3.4 3.4 8.8 0 12.2-3.4 3.4-8.8 3.4-12.2 0-3.4-3.4-3.4-8.8 0-12.2.9-.9 1.9-1.5 3-2V41.1c-1.1-.5-2.1-1.1-3-2-2.6-2.6-3.2-6.4-1.8-9.6L39.2 16.7 3.4 52.5c-4.4 4.4-4.4 11.6 0 16l53.9 53.9c4.4 4.4 11.6 4.4 16 0l51.5-51.5c4.3-4.5 4.3-11.6-.1-16z"/></svg>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- About Section -->
+<section class="section" id="about">
+    <div class="container">
+        <h2 class="section-title">About Me</h2>
+        <p class="section-subtitle">Team Lead building scalable systems for government & enterprise clients</p>
+        <div class="about-content">
+            <p>{{ profile.summary|default:"Experienced Software Engineer (4+ years) specializing in Python, Flask, Django, FastAPI, real-time systems, scalable APIs, PostgreSQL optimization, Redis caching, AWS, and CI/CD." }}</p>
+            <div class="about-info">
+                <div class="info-item">
+                    <i class="fas fa-map-marker-alt"></i>
+                    <span>{{ profile.location|default:"Bengaluru, Karnataka, India" }}</span>
+                </div>
+                <div class="info-item">
+                    <i class="fas fa-envelope"></i>
+                    <span>{{ profile.email|default:"arijitbiswas484@gmail.com" }}</span>
+                </div>
+                <div class="info-item">
+                    <i class="fas fa-phone"></i>
+                    <span>{{ profile.phone|default:"+91 8637572235" }}</span>
+                </div>
+                <div class="info-item">
+                    <i class="fas fa-check-circle"></i>
+                    <span>Immediate Joining</span>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Skills Section -->
+<section class="section section-alt" id="skills">
+    <div class="container">
+        <h2 class="section-title">Technical Skills</h2>
+        <p class="section-subtitle">Technologies I use to build production systems at scale</p>
+        <div class="skills-grid">
+            {% for skill in skills %}
+            <div class="skill-card">
+                <h3>{{ skill.category }}</h3>
+                <div class="skill-tags">
+                    {% for s in skill.skills|split:", " %}
+                    <span class="tag">{{ s }}</span>
+                    {% endfor %}
+                </div>
+            </div>
+            {% empty %}
+            <div class="skill-card">
+                <h3>Programming Languages</h3>
+                <div class="skill-tags">
+                    <span class="tag">Python</span>
+                    <span class="tag">JavaScript</span>
+                    <span class="tag">TypeScript</span>
+                </div>
+            </div>
+            <div class="skill-card">
+                <h3>Backend / Frontend</h3>
+                <div class="skill-tags">
+                    <span class="tag">Django</span>
+                    <span class="tag">Flask</span>
+                    <span class="tag">FastAPI</span>
+                    <span class="tag">React.js</span>
+                </div>
+            </div>
+            <div class="skill-card">
+                <h3>Databases</h3>
+                <div class="skill-tags">
+                    <span class="tag">PostgreSQL</span>
+                    <span class="tag">MongoDB</span>
+                    <span class="tag">MySQL</span>
+                </div>
+            </div>
+            <div class="skill-card">
+                <h3>Systems</h3>
+                <div class="skill-tags">
+                    <span class="tag">TCP</span>
+                    <span class="tag">WebSockets</span>
+                    <span class="tag">Redis</span>
+                    <span class="tag">RabbitMQ</span>
+                    <span class="tag">Celery</span>
+                </div>
+            </div>
+            <div class="skill-card">
+                <h3>Cloud/Tools</h3>
+                <div class="skill-tags">
+                    <span class="tag">AWS</span>
+                    <span class="tag">Docker</span>
+                    <span class="tag">Git</span>
+                    <span class="tag">Nginx</span>
+                    <span class="tag">Linux</span>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+</section>
+
+<!-- Experience Section -->
+<section class="section" id="experience">
+    <div class="container">
+        <h2 class="section-title">Work Experience</h2>
+        <p class="section-subtitle">From IoT systems to government-scale customs platforms</p>
+        <div class="timeline">
+            {% for exp in experiences %}
+            <div class="timeline-item">
+                <div class="timeline-dot"></div>
+                <div class="timeline-content">
+                    <div class="timeline-header">
+                        <h3>{{ exp.job_title }}</h3>
+                        <span class="timeline-date">{{ exp.start_date }} – {{ exp.end_date }}</span>
+                    </div>
+                    <p class="timeline-company">{{ exp.company }}{% if exp.location %}, {{ exp.location }}{% endif %}</p>
+                    <ul class="timeline-bullets">
+                        {% for bullet in exp.get_bullets %}
+                        <li>{{ bullet }}</li>
+                        {% endfor %}
+                    </ul>
+                </div>
+            </div>
+            {% empty %}
+            <div class="timeline-item">
+                <div class="timeline-dot"></div>
+                <div class="timeline-content">
+                    <div class="timeline-header">
+                        <h3>Senior Software Engineer</h3>
+                        <span class="timeline-date">Nov 2025 – Present</span>
+                    </div>
+                    <p class="timeline-company">Synkcode (Client: Dubai Government – Customs Department)</p>
+                    <ul class="timeline-bullets">
+                        <li>Leading backend development for mission-critical customs systems processing 15k+ secure transactions/day</li>
+                        <li>Architected scalable Python & Django services reducing API response time by 28%</li>
+                        <li>Improved system uptime to 99.9% with structured logging and monitoring</li>
+                    </ul>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+</section>
+
+<!-- Projects Section -->
+<section class="section section-alt" id="projects">
+    <div class="container">
+        <h2 class="section-title">Projects</h2>
+        <p class="section-subtitle">Real-world systems I've built end-to-end</p>
+        <div class="projects-grid">
+            {% for project in projects %}
+            <div class="project-card">
+                <div class="project-header">
+                    <i class="fas fa-folder-open"></i>
+                    <div class="project-links">
+                        {% if project.github_link %}
+                        <a href="{{ project.github_link }}" target="_blank"><i class="fab fa-github"></i></a>
+                        {% endif %}
+                        {% if project.live_link %}
+                        <a href="{{ project.live_link }}" target="_blank"><i class="fas fa-external-link-alt"></i></a>
+                        {% endif %}
+                    </div>
+                </div>
+                <h3>{{ project.title }}</h3>
+                <p>{{ project.description }}</p>
+                <div class="project-tech">
+                    {% for tech in project.tech_stack|split:", " %}
+                    <span>{{ tech }}</span>
+                    {% endfor %}
+                </div>
+            </div>
+            {% empty %}
+            <div class="project-card">
+                <div class="project-header">
+                    <i class="fas fa-folder-open"></i>
+                </div>
+                <h3>FitLife – Physiotherapy Platform</h3>
+                <p>SaaS backend for physiotherapists to assign AI-validated exercise plans, track progress, and manage corporate leaderboards.</p>
+                <div class="project-tech">
+                    <span>Python</span><span>Django</span><span>Celery</span><span>PostgreSQL</span><span>AWS S3</span>
+                </div>
+            </div>
+            <div class="project-card">
+                <div class="project-header">
+                    <i class="fas fa-folder-open"></i>
+                </div>
+                <h3>Sensor TCP Server</h3>
+                <p>50k+ sensor events/day TCP server with zone thresholds, dynamic ping intervals, SMTP alerts, and async processing.</p>
+                <div class="project-tech">
+                    <span>Python</span><span>Flask</span><span>Redis</span><span>PostgreSQL</span><span>AWS EC2</span>
+                </div>
+            </div>
+            <div class="project-card">
+                <div class="project-header">
+                    <i class="fas fa-folder-open"></i>
+                </div>
+                <h3>ParkSpaceHub</h3>
+                <p>Full-stack app connecting parking owners with seekers. Features: secure auth, live chat, booking, map-based search.</p>
+                <div class="project-tech">
+                    <span>Python</span><span>Flask</span><span>PostgreSQL</span><span>Leaflet.js</span><span>Nginx</span>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+</section>
+
+<!-- Education Section -->
+<section class="section" id="education">
+    <div class="container">
+        <h2 class="section-title">Education</h2>
+        <div class="education-grid">
+            {% for edu in educations %}
+            <div class="education-card">
+                <h3>{{ edu.degree }}</h3>
+                <p class="edu-institution">{{ edu.institution }}{% if edu.location %}, {{ edu.location }}{% endif %}</p>
+                {% if edu.cgpa %}<p class="edu-cgpa">CGPA: {{ edu.cgpa }}</p>{% endif %}
+                <p class="edu-year">{{ edu.year_range }}</p>
+            </div>
+            {% empty %}
+            <div class="education-card">
+                <h3>B.Sc</h3>
+                <p class="edu-institution">Asutosh College, Calcutta University, Kolkata</p>
+                <p class="edu-cgpa">CGPA: 7.37</p>
+                <p class="edu-year">2018 – 2021</p>
+            </div>
+            <div class="education-card">
+                <h3>ADCA (Advanced Diploma in Computer Applications)</h3>
+                <p class="edu-institution">NBCE, Kolkata</p>
+                <p class="edu-cgpa">CGPA: 8.4</p>
+                <p class="edu-year">2021 – 2022</p>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+</section>
+
+<!-- Contact Section -->
+<section class="section section-alt" id="contact">
+    <div class="container">
+        <h2 class="section-title">Get In Touch</h2>
+        <div class="contact-content">
+            <p>I'm currently available for immediate joining. Feel free to reach out!</p>
+            <div class="contact-links">
+                <a href="mailto:{{ profile.email|default:'arijitbiswas484@gmail.com' }}" class="contact-item">
+                    <i class="fas fa-envelope"></i>
+                    <span>{{ profile.email|default:"arijitbiswas484@gmail.com" }}</span>
+                </a>
+                <a href="tel:+918637572235" class="contact-item">
+                    <i class="fas fa-phone"></i>
+                    <span>{{ profile.phone|default:"+91 8637572235" }}</span>
+                </a>
+                {% if profile.linkedin %}
+                <a href="{{ profile.linkedin }}" target="_blank" class="contact-item">
+                    <i class="fab fa-linkedin"></i>
+                    <span>LinkedIn</span>
+                </a>
+                {% endif %}
+                {% if profile.github %}
+                <a href="{{ profile.github }}" target="_blank" class="contact-item">
+                    <i class="fab fa-github"></i>
+                    <span>GitHub</span>
+                </a>
+                {% endif %}
+            </div>
+            {% for p in profiles %}
+            <a href="{{ p.url }}" target="_blank" class="contact-item">
+                <i class="fas fa-link"></i>
+                <span>{{ p.platform }}{% if p.description %} – {{ p.description }}{% endif %}</span>
+            </a>
+            {% endfor %}
+        </div>
+    </div>
+</section>
+{% endblock %}
