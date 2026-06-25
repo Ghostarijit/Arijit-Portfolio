@@ -12,7 +12,6 @@ https://docs.djangoproject.com/en/5.2/ref/settings/
 
 from pathlib import Path
 import os
-import dj_database_url
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -136,8 +135,9 @@ MEDIA_URL = "/media/"
 MEDIA_ROOT = BASE_DIR / "media"
 
 # Database
-# Use PostgreSQL on Render, SQLite locally
+# Use PostgreSQL if DATABASE_URL is set, otherwise SQLite
 if os.environ.get("DATABASE_URL"):
+    import dj_database_url
     DATABASES = {
         "default": dj_database_url.config(conn_max_age=600),
     }
