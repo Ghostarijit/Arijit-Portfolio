@@ -171,6 +171,11 @@ function getReply(input) {
         return `💼 For salary discussions, please reach out directly at ${data.email}. Happy to discuss!`;
     }
 
+    // 💖 Trisha — Special Easter Egg
+    if (q.match(/trisha/)) {
+        return `💖✨ Oh, you said the magic word! ✨💖\n\nTrisha is the most special person in Arijit's life — his best friend, his biggest supporter, and the reason behind his brightest smiles. 🥰\n\n🎂 Birthday: 27th September\n💕 Together since: 11th October 2019\n📅 That's ${Math.floor((new Date() - new Date('2019-10-11')) / (1000*60*60*24*365.25))} beautiful years & counting!\n\nShe's the kind of person who makes everything better just by being there. Behind every late-night coding session, every project shipped, and every milestone — there's Trisha cheering him on. 🌟\n\nTrisha, if you're reading this — you're his forever favorite bug that he never wants to fix. 🐛💕\n\n— with love, Zudo 🤖❤️`;
+    }
+
     // Thanks
     if (q.match(/thank|thanks|dhanyawad|shukriya/)) {
         return `You're welcome! 😊 Feel free to ask anything else or reach out at ${data.email}.`;
