@@ -42,3 +42,26 @@ document.querySelectorAll('.skill-card, .timeline-item, .project-card, .educatio
     el.style.opacity = '0';
     observer.observe(el);
 });
+
+// Dark Mode Toggle
+const darkModeToggle = document.getElementById('dark-mode-toggle');
+const darkModeIcon = darkModeToggle.querySelector('i');
+
+// Check saved preference
+if (localStorage.getItem('theme') === 'dark') {
+    document.documentElement.setAttribute('data-theme', 'dark');
+    darkModeIcon.classList.replace('fa-moon', 'fa-sun');
+}
+
+darkModeToggle.addEventListener('click', () => {
+    const isDark = document.documentElement.getAttribute('data-theme') === 'dark';
+    if (isDark) {
+        document.documentElement.removeAttribute('data-theme');
+        darkModeIcon.classList.replace('fa-sun', 'fa-moon');
+        localStorage.setItem('theme', 'light');
+    } else {
+        document.documentElement.setAttribute('data-theme', 'dark');
+        darkModeIcon.classList.replace('fa-moon', 'fa-sun');
+        localStorage.setItem('theme', 'dark');
+    }
+});
